@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
 import NeonCard from './NeonCard';
+import { mockData } from '../data/mockData'; // Import the JSON data here
 
 const Dashboard = () => {
   // --- State & Edge Cases ---
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default to Night Mode
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [showBioWarning, setShowBioWarning] = useState(true);
+  const { user, challengeStats, daysTimeline } = mockData; // Destructure the imported data
 
-  // --- Mock User Data ---
-  const user = {
-    name: "Semmozhi",
-    avatar: "https://i.pravatar.cc/150?img=7",
-    bio: "", // Empty bio triggers warning
-  };
-  const missedDay = true; // Triggers Streak Freeze banner
-  const currentStreak = 12;
-  const daysCompleted = 42;
-  const daysGoal = 100;
+  // --- Derive Data from JSON ---
+  const currentStreak = challengeStats.currentStreak;
+  const daysCompleted = challengeStats.totalDaysCompleted;
+  const daysGoal = challengeStats.totalGoalDays;
   const progress = Math.round((daysCompleted / daysGoal) * 100);
 
-  // --- 7-Day Timeline Data ---
-  const timeline = [
-    { label: "Mon", date: "03", completed: true },
-    { label: "Tue", date: "04", completed: true },
-    { label: "Wed", date: "05", completed: true },
-    { label: "Thu", date: "06", completed: false },
-    { label: "Fri", date: "07", completed: false },
-    { label: "Sat", date: "08", completed: false, isToday: true }, // Today
-    { label: "Sun", date: "09", completed: false },
-  ];
+  // Check if Day 8 was missed to trigger the freeze banner
+  const missedDay = daysTimeline.find(day => day.day === 8)?.status === 'missed';
+
+  // --- Transform 60-day data into 7-day UI Timeline ---
+  // Find the index of the 'current' day
+  const currentIndex = daysTimeline.findIndex(day => day.status === 'current');
+  
+  // Slice out 7 days: 3 days before, the current day, and 3 days after
+  let displayTimeline = [];
+  if (currentIndex !== -1) {
+    const start = Math.max(0, currentIndex - 3);
+    const end = Math.min(daysTimeline.length, currentIndex + 4);
+    const slicedDays = daysTimeline.slice(start, end);
+
+    // Format the sliced data to match your existing CSS classes
+    displayTimeline = slicedDays.map(item => ({
+      label: `Day ${item.day}`,
+      date: item.day.toString().padStart(2, '0'),
+      completed: item.status === 'completed',
+      isToday: item.status === 'current'
+    }));
+  }
 
   // --- Theme Toggle Logic ---
   const toggleTheme = () => {
@@ -89,7 +97,7 @@ const Dashboard = () => {
           <span className="text-2xl">🧊</span>
           <div>
             <span className="font-bold">Streak Freeze! </span>
-            <span className="text-sm opacity-90">You missed yesterday, but your streak is protected. Get back on track today!</span>
+            <span className="text-sm opacity-90">You missed Day 8, but your streak is protected. Get back on track today!</span>
           </div>
         </div>
       )}
@@ -104,7 +112,6 @@ const Dashboard = () => {
               <span className="text-4xl md:text-5xl font-black text-cyan-500 dark:text-cyan-300">{currentStreak}</span>
               <span className="text-lg text-gray-500 dark:text-gray-400 font-medium pb-1">days</span>
             </div>
-            {/* Visual streak indicator dots */}
             <div className="mt-3 flex gap-1">
               {[...Array(7)].map((_, i) => (
                 <div key={i} className={`w-2 h-2 rounded-full ${i < (currentStreak % 7) ? 'bg-cyan-400' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
@@ -130,15 +137,15 @@ const Dashboard = () => {
         </NeonCard>
       </div>
 
-      {/* --- 7-DAY TIMELINE --- */}
+      {/* --- 7-DAY TIMELINE (Now derived from the 60-day JSON) --- */}
       <NeonCard className="text-left" borderColor="border-white/10 dark:border-white/10">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white">7-Day Timeline</h2>
-          <span className="text-xs text-gray-400 dark:text-gray-500">*Today's progress pending</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">*Current day pending</span>
         </div>
         
         <div className="flex justify-between gap-2 md:gap-4">
-          {timeline.map((day, index) => {
+          {displayTimeline.map((day, index) => {
             let statusColor = "bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-600";
             let icon = <span className="text-lg">-</span>;
 
