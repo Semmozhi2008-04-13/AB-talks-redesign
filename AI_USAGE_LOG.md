@@ -31,3 +31,43 @@
 - **Frameworks:** React 18, React Router v6, Tailwind CSS, Lucide Icons, Canvas-Confetti.
 - **Design Decisions:** Introduced "Streak Freeze" to reduce student anxiety over missed days. Used warm gradients to encourage nighttime engagement. 
 - **Development Process:** Code was generated iteratively. I requested specific components one at a time, integrated them, and adjusted the styling based on the AI's feedback. Commits were made incrementally after each major component was integrated.
+
+- I need you to build a complete React website using Tailwind CSS, styled to match a specific dark, tech-cyberpunk aesthetic. Use the following design language:
+
+1. Global Theme & Colors:
+
+Background: Deep matte black (like bg-[#0a0a0a]).
+
+Primary Accent: Neon Cyan/Teal (text-[#00ffcc], border-[#00ffcc]). Use this for glowing borders, timer numbers, and CTA highlights.
+
+Secondary Accent: Vibrant Purple (text-purple-400, bg-purple-700/20). Use this for pill badges, secondary buttons, and glassy card backgrounds.
+
+Glows: Add a custom neon glow utility (using CSS drop-shadow or box-shadow) to make cyan elements radiate a glow effect.
+
+2. Typography:
+
+Global: Modern, clean sans-serif font (like Inter or Roboto).
+
+Logo: A handwritten/script style font (like 'Caveat' or 'Kaushan Script') for the brand name 'AB TALKS' located in the top left of the navbar.
+
+3. Required Layout & Structure:
+
+Global Layout: A dark header with glassmorphism (backdrop-blur-md bg-black/50) and the branding on the left. A global layout wrapper using min-h-screen.
+
+Landing Page Hero Section:
+
+A big welcome text in white with a pill-shaped purple badge next to it.
+
+The Countdown Timer: A prominent, eye-catching digital timer block. It needs 4 distinct dark glass boxes separated by colons (for Days, Hrs, Min, Sec). The numbers inside should be styled as green glowing LCD/digital text (using a digital font and text-green-400 + drop-shadow glow).
+
+Glass Cards: Below the timer, create a card with a bg-black/40 backdrop-blur-md background and a thin, subtle glowing purple/cyan border. Include a purple section title, white description text, a main purple gradient CTA button (rounded-full), and a transparent link/button.
+
+4. What to Generate:
+
+A tailwind.config.js file that sets up the custom color palette and the necessary drop-shadow animations for the neon glow.
+
+A components/Layout.jsx (Header + Footer).
+
+A components/LandingPage.jsx matching the description above (Timer, Hero, Glass Card, CTA).
+
+A reusable NeonCard component and a CyberTimer component so the style is consistent across the whole website.
