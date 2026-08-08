@@ -6,17 +6,22 @@ export default {
   ],
   theme: {
     extend: {
-      screens: {
-        'xs': '390px',      // Mobile-first base
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-      },
       colors: {
-        primary: '#3B82F6',
-        secondary: '#10B981',
-        accent: '#8B5CF6',
+        dark: '#0a0a0a',
+        cyan: '#00ffcc',
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        script: ['Caveat', 'cursive'],
+        digital: ['"Share Tech Mono"', 'monospace'],
+      },
+      boxShadow: {
+        'neon-cyan': '0 0 15px rgba(0, 255, 204, 0.5), inset 0 0 15px rgba(0, 255, 204, 0.2)',
+        'neon-purple': '0 0 15px rgba(139, 92, 246, 0.5), inset 0 0 15px rgba(139, 92, 246, 0.2)',
+      },
+      textShadow: {
+        'glow': '0 0 10px rgba(0, 255, 204, 0.8)',
+      }
     },
   },
   plugins: [],

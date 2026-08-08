@@ -2,4 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom styles (like .counter, .hero, etc.) can go here */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+  }
+}
