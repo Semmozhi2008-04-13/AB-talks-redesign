@@ -4,10 +4,14 @@ import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import ChallengeDay from './components/ChallengeDay';
+import OnboardingPoster from './components/OnboardingPoster'; // <-- This must match
 
 function App() {
   return (
     <BrowserRouter>
+      {/* Poster is OUTSIDE of Layout */}
+      <OnboardingPoster />
+      
       <Layout>
         <Routes>
           <Route path="/" element={<LandingPage />} />
