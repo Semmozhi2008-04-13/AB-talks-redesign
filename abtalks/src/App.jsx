@@ -4,22 +4,26 @@ import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import ChallengeDay from './components/ChallengeDay';
-import OnboardingPoster from './components/OnboardingPoster'; // <-- This must match
+import OnboardingPoster from './components/OnboardingPoster';
+import { ThemeProvider } from './context/ThemeContext.jsx'
 
 function App() {
   return (
-    <BrowserRouter>
-      {/* Poster is OUTSIDE of Layout */}
-      <OnboardingPoster />
-      
-      <Layout>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/day/12" element={<ChallengeDay />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    // FIX: Wrap everything inside ThemeProvider
+    <ThemeProvider>
+      <BrowserRouter>
+        {/* Poster is OUTSIDE of Layout */}
+        <OnboardingPoster />
+        
+        <Layout>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/day/12" element={<ChallengeDay />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
