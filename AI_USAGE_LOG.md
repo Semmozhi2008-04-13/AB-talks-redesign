@@ -53,8 +53,11 @@ ABTalks runs a 60-day coding challenge for Indian college students. Students pic
     - **Missed Day (Day 8):** Instead of resetting their streak to zero (which causes anxiety and dropout), the app triggers a blue **"Streak Freeze 🧊"** banner. They maintain their streak while being gently warned to get back on track.
     - **First Day / No Streak:** The dashboard intelligently detects a zero streak and displays `"This is your first day!"` instead of a discouraging zero, framing the challenge as an exciting starting point.
 2.  **Thoughtful Idea (AI LinkedIn Draft Generator):**
-    Writing a public LinkedIn post about a coding project is the hardest part for a tired college student at 2 AM. On the `/day/12` submission page, a **"✨ Generate Draft"** button was added. It mocks an AI API to instantly populate the LinkedIn URL/Content textarea with a professional, structured post (complete with emojis and hashtags). 
+    Writing a public LinkedIn post about a coding project is the hardest part for a tired college student at 2 AM. On the `/day/12` submission page, a **"✨ Generate Draft"** button was added. It mocks an AI API to instantly populate the LinkedIn URL/Content textarea with a professional, structured post (complete with emojis and hashtags).
 3.  **Gamification (Confetti):**
     A celebratory confetti burst is triggered upon successful submission, giving the student an immediate dopamine hit and reinforcing the positive habit of daily coding.
 
 ## Route Map (Required for the Hackathon)
+- `/` - Landing Page (CTA, Workflow Steps, Testimonials)
+- `/dashboard` - Student Dashboard (Streak, Task, Progress, 60-Day Grid, Achievements)
+- `/day/12` - Challenge Day Submission Form (Task Details, AI Draft Generator, Form Submission with Confetti)
