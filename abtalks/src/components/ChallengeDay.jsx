@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { mockData } from '../data/mockdata'; // <-- Keep this ONE line
+import { user, todayTask, challengeData } from '../data/mockData';
 import { Wand2, CheckCircle, AlertCircle } from 'lucide-react';
 
 const ChallengeDay = () => {
   const { dayId } = useParams();
   const navigate = useNavigate();
   const currentDay = parseInt(dayId);
-  const task = mockData.todayTask;
+  const task = todayTask;
 
   // --- State ---
   const [githubLink, setGithubLink] = useState('');
